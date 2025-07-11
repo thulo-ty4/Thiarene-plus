@@ -314,6 +314,16 @@ body {
             <div class="logo">
                 <h1>Thiarene<span>+</span></h1>
             </div>
+            <section class="form-section container">
+  <h2>Publier un article</h2>
+  <form id="publish-form">
+    <input type="text" id="title" placeholder="Titre" required>
+    <input type="text" id="category" placeholder="Catégorie" required>
+    <input type="text" id="image" placeholder="URL de l’image" required>
+    <textarea id="excerpt" placeholder="Résumé de l’article..." required></textarea>
+    <button type="submit">Publier</button>
+  </form>
+            </section>
             <nav class="navbar">
                 <ul>
                     <li><a href="#" class="active">Accueil</a></li>
@@ -488,6 +498,23 @@ mobileMenuBtn.addEventListener('click', () => {
 // Chargement initial
 document.addEventListener('DOMContentLoaded', () => {
     loadArticles();
+});
+    document.getElementById('publish-form').addEventListener('submit', (e) => {
+  e.preventDefault();
+
+  const newArticle = {
+    title: document.getElementById('title').value,
+    category: document.getElementById('category').value,
+    image: document.getElementById('image').value,
+    excerpt: document.getElementById('excerpt').value,
+    date: new Date().toLocaleDateString()
+  };
+
+  // Ajouter dans la liste locale
+  articles.unshift(newArticle);
+  localStorage.setItem('articles', JSON.stringify(articles)); // Stocker localement
+
+  loadArticles(); // Recharger l'affichage
 });</script>
 </body>
 </html>
